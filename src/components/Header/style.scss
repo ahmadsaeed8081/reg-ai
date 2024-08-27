@@ -1,0 +1,85 @@
+// Header
+.header-camp {
+  position: fixed;
+
+  .wrap {
+    .left {
+      .logo-img {
+        .logo {
+          height: 70px;
+          width: auto;
+
+          @include media("<=phoneH") {
+            height: 48px;
+          }
+        }
+      }
+    }
+
+    .center {
+      flex: 1;
+
+      .menu-item {
+        font-family: "Inter", sans-serif;
+        color: #ffff;
+        font-size: 16px;
+        font-weight: 400;
+
+        &:hover,
+        &.active {
+          @include anim;
+          cursor: pointer;
+          background: linear-gradient(93.21deg, #d114ba 6.06%, #532ecd 132.54%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+
+      @include media("<=tablet") {
+        display: none;
+      }
+    }
+
+    .right {
+      .btn-stack {
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: "Inter", sans-serif;
+      }
+
+      .social {
+        .icon {
+          height: 18px;
+          width: 18px;
+          cursor: pointer;
+
+          &:hover {
+            @include anim;
+
+            svg {
+              path {
+                fill: #d114ba;
+              }
+            }
+          }
+        }
+      }
+
+      @include media("<=tablet") {
+        display: none;
+      }
+    }
+
+    .menu-icon {
+      height: 18px;
+      width: 18px;
+      cursor: pointer;
+      display: none;
+
+      @include media("<=tablet") {
+        display: flex;
+      }
+    }
+  }
+}

@@ -1,0 +1,77 @@
+.staking-page {
+  width: 100%;
+  height: 100%;
+  min-height: 768px;
+  background-image: url("../../../public/images/stack-bg.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 120px 0;
+
+  .wrap {
+    .main-block {
+      @include media("<=tablet") {
+        flex-direction: column;
+      }
+
+      .left {
+        @include media("<=tablet") {
+          width: 100%;
+        }
+
+        .tabs {
+          background: #1c1c1c;
+          border: 4px solid #444;
+          padding: 6px;
+          border-radius: 10px;
+
+          .tab-item {
+            width: 100%;
+            font-size: 16px;
+            color: #fff;
+            padding: 14px 18px;
+            cursor: pointer;
+            @include anim;
+            text-align: center;
+
+            &:first-child {
+              border-radius: 14px 0 0 14px;
+            }
+
+            &:nth-child(2) {
+              border-left: 1px solid #552c77;
+              border-right: 1px solid #552c77;
+            }
+
+            &:last-child {
+              border-radius: 0 14px 14px 0;
+            }
+
+            &.active {
+              background: linear-gradient(97.05deg,
+                  #d114ba 16.22%,
+                  #552c77 132.4%);
+            }
+          }
+        }
+
+        .stack-box {
+          border-radius: 12px;
+          border: 1px solid #d114ba;
+        }
+      }
+
+      .right {
+        @include media("<=tablet") {
+          width: 100%;
+        }
+
+        .url {
+          background: linear-gradient(93.21deg, #d114ba 6.06%, #532ecd 132.54%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+    }
+  }
+}
