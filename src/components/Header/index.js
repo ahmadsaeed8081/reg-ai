@@ -2,7 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { TelegramIcon, TwitterIcon, MenuIcon } from "../../assets/Icons";
 
+
+import { useWeb3Modal,useWeb3ModalTheme,use } from '@web3modal/wagmi/react'
+import { useAccount, useReadContract, useWriteContract } from "wagmi";
+
 const Header = ({ openSidebar, setOpenSidebar }) => {
+
+  const { open, close } = useWeb3Modal()
+  const { isConnected,isDisconnected,chain } = useAccount()
+  const { address } = useAccount();
+
+
   const [isTop, setTop] = useState(true);
   useEffect(() => {
     window.onscroll = () => {
@@ -55,8 +65,9 @@ const Header = ({ openSidebar, setOpenSidebar }) => {
           <div  className="menu-item">Trade</div>
         </div>
         <div className="right flex items-center justify-end gap-8">
-          <button  className="btn-stack button">
-            Connect Walet
+          <button onClick={() => open()}  className="btn-stack button">
+            {!isConnected?("Connect Wallet"):(address.slice(0,4)+"...."+address.slice(39,42))}
+
           </button>
           {/* <div className="social flex items-center gap-3">
             <div className="icon flex items-center justify-center">
