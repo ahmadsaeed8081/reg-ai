@@ -70,8 +70,8 @@ const StakingPass = (props) => {
       abi: minting_abi,
       address: mint_address,
       functionName: "mint", 
-      args: [numb,ref_add],
-      value: (Number(numb) * (Number(props.nft_priceInBNB))).toString()
+      args: [numb,ref_add,"78967887"],
+      value: props.owner!=address? (Number(numb) * (Number(props.nft_priceInBNB))).toString():"0"
 
     });
 
@@ -91,7 +91,7 @@ if(count==1)
 {
   notify()
   setNumb(0)
-  test();
+  props.test();
 }
 }
 
@@ -133,7 +133,6 @@ if(isDisconnected)
   alert("kindly connect your wallet ");
   return;
 }
-
 if(numb==0 )
 {
   alert("kindly write amount to stake ");
@@ -220,10 +219,10 @@ useEffect(()=>{
                   Total Amount
                 </label>
                 <label className="inter text-white font-normal text-sm">
-                  {(Number(numb)* (Number(props.nft_priceInBNB)/10**18))} BNB
+                  {(Number(numb)* Convert_To_eth(Number(props.nft_priceInBNB)))} BNB
                 </label>
               </div>
-              <button onClick={Mint} className="btn button text-white">Mint NFT Nows</button>
+              <button onClick={Mint} className="btn button text-white">{isConfirming ? "confirming" : "Mint Now"}</button>
             </div>
           </div>
         </div>
@@ -446,7 +445,7 @@ useEffect(()=>{
             </div>
 
             <h1 className="url  pt-2 font-semibold  text-[#D114BA] text-lg inter">
-              {window.location.host}/?ref={!isDisconnected ? address.slice(0,4)+"..."+address.slice(39,42):"connnect wallet"}
+              {window.location.host}/?ref={address ? address.slice(0,4)+"..."+address.slice(39,42):"connnect wallet"}
             </h1>
           </div>
         </div>

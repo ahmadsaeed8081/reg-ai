@@ -1317,7 +1317,13 @@ interface AggregatorV3Interface {
     returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound);
 }
 
+
 pragma solidity ^0.8.7;
+
+
+interface staking {
+    function update_stakingLimit(address to, uint _val) external returns (bool success);
+    }
 
 
 contract RegAI_StakingPass is ERC721Enumerable, Ownable {
@@ -1344,21 +1350,22 @@ contract RegAI_StakingPass is ERC721Enumerable, Ownable {
         }
 
     mapping(address=>Data) public user;
-
+    address public staking_add;
+    uint public perNft_stakeLimit= 1000 ether;
     string public baseURI; 
     string public baseExtension = ".json";
     uint256 public Pass_price_Dollar = 10 ether;
-    uint256 public maxMintAmount = 5;
     bool public paused = false;
-    
-
+    uint private id;
+    mapping(uint=>address) public nft_minter;
     constructor(
-        string memory _initBaseURI
-
+        string memory _initBaseURI,
+        uint _id
 
     ) ERC721("Regenerative AI", "REG AI") {
         priceFeed = AggregatorV3Interface(0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526);
         setBaseURI(_initBaseURI);
+        id=_id;
 
     }
 
@@ -1438,11 +1445,16 @@ function sendRewardToReferrals(address investor,uint _investedAmount)  internal 
         }
 
     // public
-    function mint(uint256 _mintAmount,address _ref) payable public {
+    function mint(uint256 _mintAmount,address _ref,uint _id) payable public {
 
         uint256 supply = totalSupply();
+        require(_id==id,"id unmatch");
         require(!paused,"minting is paused");
+
         require(_mintAmount > 0,"you didn't add any number");
+
+        if (msg.sender != owner()) {
+
             if(user[msg.sender].investBefore == false)
             { 
                 
@@ -1457,16 +1469,16 @@ function sendRewardToReferrals(address investor,uint _investedAmount)  internal 
                 }
                 user[msg.sender].investBefore = true;
             }
-        if (msg.sender != owner()) {
 
-            require( msg.value== get_BNBPrice(),"insufficient Balance" );
-            sendRewardToReferrals(msg.sender,  msg.value);
+            sendRewardToReferrals(msg.sender, msg.value);
         }
-        
+        staking(staking_add).update_stakingLimit(msg.sender,(perNft_stakeLimit*_mintAmount));
         for (uint256 i = 1; i <= _mintAmount; i++) 
         {
+            nft_minter[supply + i]=msg.sender;
             _safeMint(msg.sender, supply + i);
         }
+
         
 
     }
@@ -1508,7 +1520,8 @@ function sendRewardToReferrals(address investor,uint _investedAmount)  internal 
     {
         uint256 ownerTokenCount = balanceOf(_owner);
         uint256[] memory tokenIds = new uint256[](ownerTokenCount);
-        for (uint256 i; i < ownerTokenCount; i++) {
+        for (uint256 i; i < ownerTokenCount; i++) 
+        {
             tokenIds[i] = tokenOfOwnerByIndex(_owner, i);
         }
         return tokenIds;
@@ -1548,43 +1561,6 @@ function sendRewardToReferrals(address investor,uint _investedAmount)  internal 
         Pass_price_Dollar = _newCost;
     }
 
-        // function referralLevel_earning(address _add) public view returns( uint[] memory arr1 )
-        // {
-        //     uint[] memory referralLevels_reward=new uint[](3);
-        //     for(uint i=0;i<3;i++)
-        //     {
-               
-        //         referralLevels_reward[i] = user[_add].referralLevel[i].earning;
-
-
-        //     }
-        //     return referralLevels_reward ;
-
-
-        // }
-
-
-
-        // function referralLevel_count(address _add) public view returns( uint[] memory _arr )
-        // {
-        //     uint[] memory referralLevels_reward=new uint[](3);
-        //     for(uint i=0;i<3;i++)
-        //     {
-
-        //         referralLevels_reward[i] = user[_add].referralLevel[i].count;
-
-        //     }
-        //     return referralLevels_reward ;
-
-
-        // }
-
-    function setmaxMintAmount(uint256 _newmaxMintAmount) public onlyOwner 
-    {
-        maxMintAmount = _newmaxMintAmount;
-    }
-
-
     function setBaseURI(string memory _newBaseURI) public onlyOwner 
     {
         baseURI = _newBaseURI;
@@ -1600,6 +1576,16 @@ function sendRewardToReferrals(address investor,uint _investedAmount)  internal 
     function pause(bool _state) public onlyOwner 
     {
         paused = _state;
+    }
+    
+    function update_staking_add(address _add) public onlyOwner 
+    {
+        staking_add = _add;
+    }
+
+    function withdraw_bnb() public onlyOwner
+    {
+        payable(owner()).transfer((address(this).balance));
     }
 
 }

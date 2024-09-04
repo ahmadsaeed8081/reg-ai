@@ -1,7 +1,3 @@
-/**
- *Submitted for verification at polygonscan.com on 2024-08-01
-*/
-
 //SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
@@ -9,43 +5,54 @@ pragma solidity ^0.8.0;
 interface Token {
     function transfer(address to, uint tokens) external returns (bool success);
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool) ;
-      function balanceOf(address account) external view returns (uint256);
+    function balanceOf(address account) external view returns (uint256);
     function allowance(address owner, address spender) external view returns (uint256);
 
+
     }
-contract YouSamartian_Staking
+
+interface NFT {
+    function transfer(address to, uint tokens) external returns (bool success);
+    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool) ;
+    function balanceOf(address account) external view returns (uint256);
+    function allowance(address owner, address spender) external view returns (uint256);
+
+
+    }
+
+
+contract RegAi_Staking
     {
        
         address  public owner;
 
-        address Staking_token= 0x2484b0c9f6C500EB763c8b1F95e5057560139279; 
-        address Reward_Token= 0x2484b0c9f6C500EB763c8b1F95e5057560139279; 
+        address Staking_token= 0xf3fc68cA1E6d05B9b40E414225b9630172eaB3c4; 
+        address Reward_Token=  0xf3fc68cA1E6d05B9b40E414225b9630172eaB3c4; 
+        address NFT_address=  0xf3fc68cA1E6d05B9b40E414225b9630172eaB3c4; 
+        uint public perTokenValue = 0.1 ether;
 
      mapping(address=>bool) public isUser;
 
         uint public totalusers;
-        uint public penalty_percentage= 10 ether;
-
-        uint public per_day_divider= 1 days;
-
+        uint perday_reward=300000 ether;
+        uint public per_day_divider= 2 minutes;
+        uint public fee_percentage= 5 ether;
 
         uint public totalbusiness; 
-        bool public suspend; 
-
         mapping(uint=>address) public All_investors;
+        mapping(uint=>uint) public perDay_StakeAmount;
+        uint public launchTime; 
+        uint public endTime; 
+        mapping(address=>uint) public stakeLimitof;
 
         struct allInvestments{
 
             uint investedAmount;
-            uint withdrawnTime;
             uint DepositTime;
             uint investmentNum;
             uint unstakeTime;
             bool unstake;
             uint reward;
-            uint apr;
-            uint timeframe;
-            uint pending_rew;
 
 
         }
@@ -59,17 +66,12 @@ contract YouSamartian_Staking
             uint totalInvestment;
             uint totalWithdraw_reward;
             bool investBefore;
+
         }
 
 
-        struct time_Apy
-        {
-            uint timeframe;
-            uint APR;
-        }
           mapping(address=>Data) public user;
 
-            mapping(uint=>time_Apy) public details;
 
             mapping(address=>mapping(uint=>allInvestments)) public user_investments;
 
@@ -77,14 +79,8 @@ contract YouSamartian_Staking
             
             owner=msg.sender;              
 
-            details[0].timeframe=90 days;
-            details[1].timeframe=180 days;
-            details[2].timeframe=270 days;
-
-            
-            details[0].APR=9;
-            details[1].APR=36;
-            details[2].APR=81;
+            launchTime=block.timestamp;
+            endTime=block.timestamp + 80 minutes;
 
 
 
@@ -92,40 +88,38 @@ contract YouSamartian_Staking
 
 
 
-
-
-        function Stake(uint _investedamount,uint choose_val) external  returns(bool success)
+        function Stake(uint _investedamount) external  returns(bool success)
         {
-            require(details[choose_val].APR > 0," apr iss");
-            require(_investedamount > 0,"value is not greater than 0");     //ensuring that investment amount is not less than zero
-            require(!suspend, "it's suspended");
+            require(_investedamount > 0,"value is not greater than 0"); 
             require(Token(Staking_token).allowance(msg.sender,address(this))>=_investedamount,"allowance");
+            require(block.timestamp < endTime,"staking is over" );
 
-            if(user[msg.sender].investBefore == false)
-            { 
-                All_investors[totalusers]=msg.sender;
-                isUser[msg.sender]=true;
-
-                totalusers++;                                     
-            }
+            require(stakeLimitof[msg.sender] >= (_investedamount * perTokenValue)/1 ether, "limit issue");
+            stakeLimitof[msg.sender] = stakeLimitof[msg.sender]- ((_investedamount * perTokenValue)/1 ether);
 
             uint num = user[msg.sender].noOfInvestment;
+            if(user[msg.sender].totalInvestment ==0 )
+            {
+                totalusers++;
+            }
+
+            uint temp=_investedamount;
+
+            uint tax                     
+                     /**
+                      * @dev This function calculates the total reward for a user.
+                      * @return Returns the total reward for the user.
+                      */ = _investedamount * fee_percentage/100 ether;
+            _investedamount -= tax;
+            uint _day = (block.timestamp - launchTime)/per_day_divider;
+            perDay_StakeAmount[_day] += _investedamount;
             user[msg.sender].investment[num].investedAmount =_investedamount;
             user[msg.sender].investment[num].DepositTime=block.timestamp;
-            user[msg.sender].investment[num].withdrawnTime=block.timestamp + details[choose_val].timeframe ;  
-            
             user[msg.sender].investment[num].investmentNum=num;
-            user[msg.sender].investment[num].apr=details[choose_val].APR;
-             user[msg.sender].investment[num].timeframe=(details[choose_val].timeframe/per_day_divider) ;  
-
-
             user[msg.sender].totalInvestment+=_investedamount;
             user[msg.sender].noOfInvestment++;
             totalbusiness+=_investedamount;
-
-
-            Token(Staking_token).transferFrom(msg.sender,address(this),_investedamount);
-            user_investments[msg.sender][num] = user[msg.sender].investment[num];
+            Token(Staking_token).transferFrom(msg.sender,address(this),temp);
             user[msg.sender].investBefore=true;
 
             return true;
@@ -133,96 +127,90 @@ contract YouSamartian_Staking
         }
 
         function get_TotalReward() view public returns(uint){ 
-            uint totalReward;
             uint depTime;
             uint rew;
             uint temp = user[msg.sender].noOfInvestment;
             for( uint i = 0;i < temp;i++)
             {   
-                if(!user[msg.sender].investment[i].unstake)
+                if(user[msg.sender].investment[i].unstake)
                 {
-                    if(block.timestamp < user[msg.sender].investment[i].withdrawnTime)
-                    {
-                        depTime =block.timestamp - user[msg.sender].investment[i].DepositTime;
-                    }
-                    else
-                    {    
-                        depTime =user[msg.sender].investment[i].withdrawnTime - user[msg.sender].investment[i].DepositTime;
-                    }                
-                }
-                else{
+                    depTime =user[msg.sender].investment[i].unstakeTime - user[msg.sender].investment[i].DepositTime;
 
-                    if(user[msg.sender].investment[i].unstakeTime <= user[msg.sender].investment[i].withdrawnTime)
-                    {
-                        depTime =user[msg.sender].investment[i].unstakeTime - user[msg.sender].investment[i].DepositTime;
-                    }
-                    else if(user[msg.sender].investment[i].unstakeTime > user[msg.sender].investment[i].withdrawnTime)
-                    {
-                        depTime =user[msg.sender].investment[i].withdrawnTime - user[msg.sender].investment[i].DepositTime;
-                    }                
-                    
                 }
-                depTime=depTime/per_day_divider; //1 day
-                if(depTime>0)
+                else if(block.timestamp > endTime )
                 {
-                     rew  =  (((user[msg.sender].investment[i].investedAmount * ((user[msg.sender].investment[i].apr) *10**18) )/ (100*10**18) )/(user[msg.sender].investment[i].timeframe));
+                    depTime = endTime - user[msg.sender].investment[i].DepositTime;
 
-                    totalReward += depTime * rew;
-                }
-            }
-            totalReward -= user[msg.sender].totalWithdraw_reward;
-
-            return totalReward;
-        }
-
-        function getReward_perInv(uint i, address add) view public returns(uint){ //this function is get the total reward balance of the investor
-            uint totalReward;
-            uint depTime;
-            uint rew;
-
-                if(!user[add].investment[i].unstake)
-                {
-                    if(block.timestamp < user[add].investment[i].withdrawnTime)
-                    {
-                        depTime =block.timestamp - user[add].investment[i].DepositTime;
-                    }
-                    else
-                    {    
-                        depTime =user[add].investment[i].withdrawnTime - user[add].investment[i].DepositTime;
-                    }     
                 }
                 else
                 {
-                    if(user[add].investment[i].unstakeTime <= user[add].investment[i].withdrawnTime)
-                    {
-                        depTime =user[add].investment[i].unstakeTime - user[add].investment[i].DepositTime;
-                    }
-                    else if(user[add].investment[i].unstakeTime > user[add].investment[i].withdrawnTime)
-                    {
-                        depTime =user[add].investment[i].withdrawnTime - user[add].investment[i].DepositTime;
-                    }
+                    depTime =block.timestamp - user[msg.sender].investment[i].DepositTime;
 
                 }
                 depTime=depTime/per_day_divider; //1 day
                 if(depTime>0)
                 {
-                     rew  =  (((user[add].investment[i].investedAmount * ((user[add].investment[i].apr) *10**18) )/ (100*10**18) )/(user[add].investment[i].timeframe));
+                    uint  start= (user[msg.sender].investment[i].DepositTime -launchTime)/per_day_divider;
+                    for(uint j = start ; j < (start+depTime);j++ )
+                    {
+                        uint supply = get_eachDayStake(j);
+                        uint sharePercentage = (100 ether * user[msg.sender].investment[i].investedAmount) / supply;
+
+                        rew  +=  ((perday_reward * sharePercentage )/ (100*10**18) );
+
+                    }
+                }
+            }
+
+            return rew;
+        }
+
+        function getReward_perInv(uint i, address add) view public returns(uint){ //this function is get the total reward balance of the investor
+            uint depTime;
+            uint rew;
 
 
-                    totalReward += depTime * rew;
+                if(user[add].investment[i].unstake)
+                {
+                    depTime =user[add].investment[i].unstakeTime - user[add].investment[i].DepositTime;
+
+                }
+                else if(block.timestamp > endTime )
+                {
+                    depTime = endTime - user[add].investment[i].DepositTime;
+
+                }
+                else
+                {
+                    depTime =block.timestamp - user[add].investment[i].DepositTime;
+
+                }
+
+                depTime = depTime/per_day_divider; //1 day
+                if(depTime>0)
+                {
+                    uint  start = (user[add].investment[i].DepositTime -launchTime )/per_day_divider;
+                    for( uint j = start ; j < (start+depTime) ; j++ )
+                    {
+                        uint supply = get_eachDayStake(j);
+                        uint sharePercentage = (100 ether * user[add].investment[i].investedAmount) /supply;
+
+                        rew  +=  ((perday_reward * sharePercentage )/ (100*10**18) );
+
+                    }
                 }
             
 
-            return totalReward;
+            return rew;
         }
 
 
 
         function withdrawReward() external returns (bool success){
-            uint Total_reward = get_TotalReward();
-            require(Total_reward>0,"you dont have rewards to withdrawn");         //ensuring that if the investor have rewards to withdraw
-        
-            Token(Reward_Token).transfer(msg.sender,Total_reward);             // transfering the reward to investor             
+
+            uint Total_reward = get_TotalReward() - total_withdraw_reaward();
+            require(Total_reward>0,"you dont have rewards to withdrawn");         
+            Token(Reward_Token).transfer(msg.sender,Total_reward);                          
             user[msg.sender].totalWithdraw_reward+=Total_reward;
 
             return true;
@@ -235,17 +223,11 @@ contract YouSamartian_Staking
         {
 
 
-            require(user[msg.sender].investment[num].investedAmount>0,"you dont have investment to withdrawn");             //checking that he invested any amount or not
+            require(user[msg.sender].investment[num].investedAmount>0,"you dont have investment to withdrawn");            
             require(!user[msg.sender].investment[num].unstake ,"you have withdrawn");
             uint amount=user[msg.sender].investment[num].investedAmount;
 
-           if(user[msg.sender].investment[num].withdrawnTime > block.timestamp)
-            {
-                uint penalty_fee=(amount*(penalty_percentage))/(100*10**18);
-                Token(Staking_token).transfer(owner,penalty_fee);            
-                amount=amount-penalty_fee;
-            }
-            Token(Staking_token).transfer(msg.sender,amount);             //transferring this specific investment to the investor
+            Token(Staking_token).transfer(msg.sender,amount);             
           
             user[msg.sender].investment[num].unstake =true;    
             user[msg.sender].investment[num].unstakeTime =block.timestamp;    
@@ -264,10 +246,6 @@ contract YouSamartian_Staking
 
         }
 
-        function get_pending_Rew(address add, uint num) public view returns(uint)
-        {  
-            return (user[add].investment[num].investedAmount * (user[add].investment[num].apr * 1 ether)/ 100 ether) - (getReward_perInv(num,add));
-        }
 
         function getAll_investments() public view returns (allInvestments[] memory Invested)
         { 
@@ -293,7 +271,6 @@ contract YouSamartian_Staking
 
                    temp_arr[currentIndex]=user[msg.sender].investment[i];
                     temp_arr[currentIndex].reward=getReward_perInv(i,msg.sender);
-                    temp_arr[currentIndex].pending_rew=get_pending_Rew(msg.sender,i);
 
                    currentIndex++;
                }
@@ -326,7 +303,6 @@ contract YouSamartian_Staking
 
                 temp_arr[currentIndex]=user[msg.sender].investment[i];
                 temp_arr[currentIndex].reward=getReward_perInv(i,msg.sender);
-                temp_arr[currentIndex].pending_rew = get_pending_Rew(msg.sender,i);
 
                 currentIndex++;
                
@@ -344,7 +320,7 @@ contract YouSamartian_Staking
             return Invested;
 
         }
-        
+
   
         function transferOwnership(address _owner)  public
         {
@@ -352,18 +328,15 @@ contract YouSamartian_Staking
             owner = _owner;
         }
 
-
-        function Set_penalty_percentage(uint _val)  public
-        {
-            require(msg.sender==owner,"only Owner can call this function");
-            penalty_percentage = _val;
-        }
-
-
         function total_withdraw_reaward() view public returns(uint)
         {
             uint Temp = user[msg.sender].totalWithdraw_reward;
             return Temp;
+        }
+
+       function get_DepTime(uint i) public view returns(uint)
+        {
+            return user[msg.sender].investment[i].DepositTime;
         }
 
         function get_currTime() public view returns(uint)
@@ -371,11 +344,37 @@ contract YouSamartian_Staking
             return block.timestamp;
         }
         
-        function get_withdrawnTime(uint num) public view returns(uint)
-        {
-            return user[msg.sender].investment[num].withdrawnTime;
-        }
 
+        function get_eachDayStake(uint _day) public view returns(uint)
+        {
+            uint amount;
+            for(uint i=0; i<=_day ;i++)
+            {
+              amount = amount + perDay_StakeAmount[i] ;
+            }
+            return amount;
+
+        }
+        
+        function update_stakingLimit(address _add, uint _val) public returns(bool)
+        {
+            require(msg.sender==NFT_address);
+            stakeLimitof[_add]+=_val;
+            return true;
+
+        }
+        // function Find_perdayShare(uint _day,uint _amount) public view returns(uint)
+        // {
+        //     uint supply = Token(Staking_token).per_day_supply(_day);
+        //     uint sharePercentage = 100 ether * _amount /supply;
+
+        //     return sharePercentage;
+        // }
+
+        function get_StakeLimit() public view
+        {
+
+        }
 
        function withdrawFunds(uint _amount)  public
         {
@@ -386,10 +385,5 @@ contract YouSamartian_Staking
             Token(Staking_token).transfer(owner,_amount); 
         }
 
-       function set_suspend(bool _val)  public
-        {
-            require(msg.sender==owner);
-            suspend =_val;
-        }
 
     }

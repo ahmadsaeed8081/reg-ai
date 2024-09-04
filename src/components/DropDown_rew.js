@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ArrowDownIcon } from "../assets/Icons";
 import moment from "moment";
 
-const DropDown = ({ dropDownList, selectedValue, setSelectedValue }) => {
+const DropDown_rew = ({ dropDownList, selectedValue, setSelectedValue }) => {
   const [hide, setHide] = useState(false);
 
   const count1 = (time) => {
@@ -71,4 +71,4 @@ const DropDown = ({ dropDownList, selectedValue, setSelectedValue }) => {
   );
 };
 
-export default DropDown;
+export default DropDown_rew;

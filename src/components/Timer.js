@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Timer = () => {
+const Timer = (props) => {
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -10,12 +10,12 @@ const Timer = () => {
 
   useEffect(() => {
     const calculateCountdown = () => {
-      const dateInHuman = new Date("2024-05-02"); // Replace with your target date and time
-      const formattedDate = dateInHuman.toISOString();
-      const targetDate = new Date(formattedDate);
+      // const dateInHuman =  Number(props.time) * 1000 - new Date();
+      // const formattedDate = dateInHuman.toISOString();
+      // const targetDate = new Date(formattedDate);
 
       const now = new Date().getTime();
-      const distance = targetDate - now;
+      const distance = new Date().getTime();
 
       if (distance > 0) {
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -46,7 +46,7 @@ const Timer = () => {
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [props.time]);
 
   return (
     <div className="timer-comp">
