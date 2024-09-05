@@ -10,7 +10,7 @@ const Footer = () => {
             Token Address
           </h1>
           <p className="text-white font-light text-sm text-center">
-            Reg Ai: 0x8A36D4f99aa7E6a80c25Aa97291B83000EEdf646
+            Reg Ai: 0xa3A2d98c55DA6ef9C732b44d2E9BB8D9Ea719362
           </p>
           <div className="social flex items-center justify-center gap-3">
             <div className="icon flex items-center justify-center cursor-pointer">

@@ -1,8 +1,9 @@
 import React, { useState,useEffect } from "react";
 import Wrapper from "../../routes/Wrapper";
 import { CopyIcon } from "../../assets/Icons";
+import { PiCopyLight } from "react-icons/pi";
 
-
+import sp_image from '../../assets/images/DigitalMarketing.png';
 
 import Web3 from "web3";
 import { ToastContainer, toast } from 'react-toastify';
@@ -170,7 +171,7 @@ useEffect(()=>{
       <div className="staking-pass-page flex items-center justify-center">
         <div className="wrap wrapWidth flex items-center justify-center gap-14">
           <div className="left flex items-center justify-center flex-1">
-            <img src="./images/DigitalMarketing.png" />
+            <img src={sp_image} />
           </div>
           <div className="right flex flex-col flex-1">
             <h1 className="title mb-4">Regenerative A.I Token</h1>
@@ -239,12 +240,12 @@ useEffect(()=>{
           <div className="flex items-center  flex-wrap justify-center cursor-pointer">
             <div className="flex flex-col gap-6 rounded-lg p-5 border border-[#D114BA] sm:w-[800px]  min-h-[200px]">
               <div className="flex items-center justify-end w-full">
-                <h3 className="bg-[#D114BA] text-white inter font-normal text-xs p-1 rounded-lg">
-                  85%
+                <h3 className="bg-[#D114BA] text-white inter font-normal text-xs p-1 rounded-lg" >
+                  {/* 85% */}
                 </h3>
               </div>
               <h2 className="zen-dots font-medium text-2xl inter text-white sm:text-center text-left">
-              Total Earning : {props.user? (Number(props.user[4])+ Number(props.user[7])) :0} <span className=" text-[#FF5EEB]">BNB</span>
+              Total Earning : {props.user? ((Number(props.user[4])+ Number(props.user[7]))/10**18).toFixed(4) :0} <span className=" text-[#FF5EEB]">BNB</span>
               </h2>
 
               <div className="sm:flex block items-center justify-between inter">
@@ -260,12 +261,12 @@ useEffect(()=>{
                     </div>
                     <div className=" sm:text-center  text-left">
                       <p className=" text-white text-[16px]">Amount</p>
-                      <p className=" text-white text-[16px] pt-2">{props.user? Number(props.user[3]):0}</p>
+                      <p className=" text-white text-[16px] pt-2">{props.user? (Number(props.user[3])/10**18).toFixed(4):0}</p>
                       <p className=" text-white text-[16px]">BNB</p>
                     </div>
                     <div className="sm:text-center  text-left">
                       <p className=" text-[#D114BA]  text-[16px]">Reward</p>
-                      <p className=" text-[#D114BA] text-[16px] pt-2">{props.user? Number(props.user[4]):0}</p>
+                      <p className=" text-[#D114BA] text-[16px] pt-2">{props.user? (Number(props.user[4])/10**18).toFixed(4):0}</p>
                       <p className=" text-white text-[16px]">BNB</p>
                     </div>
                   </div>
@@ -283,12 +284,12 @@ useEffect(()=>{
                     </div>
                     <div className=" sm:text-center  text-left">
                       <p className=" text-white text-[16px]">Amount</p>
-                      <p className=" text-white text-[16px] pt-2">{props.user? Number(props.user[6]):0}</p>
+                      <p className=" text-white text-[16px] pt-2">{props.user? (Number(props.user[6])/10**18).toFixed(4):0}</p>
                       <p className=" text-white text-[16px]">BNB</p>
                     </div>
                     <div className="sm:text-center  text-left">
                       <p className=" text-[#D114BA]  text-[16px]">Reward</p>
-                      <p className=" text-[#D114BA] text-[16px] pt-2">{props.user? Number(props.user[7]):0}</p>
+                      <p className=" text-[#D114BA] text-[16px] pt-2">{props.user? (Number(props.user[7])/10**18).toFixed(4):0}</p>
                       <p className=" text-white text-[16px]">BNB</p>
                     </div>
                   </div>
@@ -433,12 +434,12 @@ useEffect(()=>{
 
           <div className="flex   flex-col p-5 border border-[#D114BA] rounded-xl mt-10  sm:w-[800px] mx-auto">
             <div className="flex items-center gap-2">
-              <h1 className="text-white">My Link</h1>
+              <h1 className="text-white" >My Link</h1>
               <div className="flex items-center justify-center cursor-pointer h-4 w-4">
-              <CopyToClipboard text={`${window.location.host}/?ref=${address? address:""}`}>
-                
-                <CopyIcon onClick={link_notify}  />
-              
+              <CopyToClipboard text={`${window.location.host}/staking-pass/?ref=${address? address:""}`}>
+
+                <PiCopyLight onClick={link_notify} color="#ffffff"/>
+
               </CopyToClipboard>
 
               </div>
@@ -449,10 +450,12 @@ useEffect(()=>{
             </h1>
           </div>
         </div>
+
       </div>
       <ToastContainer />
 
     </Wrapper>
+    
   );
 };
 

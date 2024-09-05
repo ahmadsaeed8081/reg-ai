@@ -1,7 +1,7 @@
 
 export const regai_address="0xf3fc68cA1E6d05B9b40E414225b9630172eaB3c4"
-export const staking_address="0xe2F2E6F6F520725844090aFb6714f531e0F8a659"
-export const mint_address="0x794aaD75e5B73D9e125Be93613bc5148E0EC4075";
+export const staking_address="0xc32ca39994660412e6D98bC6b50015454DbfA4AC"
+export const mint_address="0xCCc4F13Cb414C4Fc905FAA906B314f991be94538";
 
 export const staking_abi=[
 	{

@@ -1375,7 +1375,7 @@ contract RegAI_StakingPass is ERC721Enumerable, Ownable {
     }
 
 
-function sendRewardToReferrals(address investor,uint _investedAmount)  internal  //this is the freferral function to transfer the reawards to referrals
+    function sendRewardToReferrals(address investor,uint _investedAmount)  internal 
         { 
 
             address temp = user[investor].upliner;
@@ -1397,11 +1397,12 @@ function sendRewardToReferrals(address investor,uint _investedAmount)  internal 
             bool pre_person;
             
 
-            while(temp!=address(0) && i <3)
+            while(temp!=address(0) && i < 3)
             {
                 if(user[temp].direct_quantity >= level_sale[i])
                 {
                     uint reward1 = (percentage[i]  * _investedAmount)/100 ether;
+
                     if(i==0)
                     {
                         user[temp].direct_quantity++ ; 
@@ -1413,7 +1414,7 @@ function sendRewardToReferrals(address investor,uint _investedAmount)  internal 
                         if(pre_person == false)
                         {
                             user[temp].indirect_quantity++ ; 
-                            user[temp].indirect_amount += get_BNBPrice() ; 
+                            user[temp].indirect_amount += get_BNBPrice(); 
                         }
 
                         user[temp].indirect_reward += reward1;
@@ -1426,6 +1427,7 @@ function sendRewardToReferrals(address investor,uint _investedAmount)  internal 
                     if(user[temp].direct_quantity < level_sale[i+1])
                     {                                    
                         temp = user[temp].upliner;
+                        pre_person=false;
 
 
                     }
@@ -1436,6 +1438,12 @@ function sendRewardToReferrals(address investor,uint _investedAmount)  internal 
                     i++;
 
                 }
+                else{
+
+                    temp = user[temp].upliner;
+                    pre_person=false;
+                }
+                
 
             } 
 
@@ -1457,17 +1465,18 @@ function sendRewardToReferrals(address investor,uint _investedAmount)  internal 
 
             if(user[msg.sender].investBefore == false)
             { 
-                
+
                 if(_ref==address(0) || _ref==msg.sender)
                 {
-                    user[msg.sender].upliner=owner();
+                    user[msg.sender].upliner = owner();
                 }                            
-                else{
-                    
-                    user[msg.sender].upliner=_ref;
-
+                else
+                {
+                    user[msg.sender].upliner = _ref;
                 }
+
                 user[msg.sender].investBefore = true;
+
             }
 
             sendRewardToReferrals(msg.sender, msg.value);
@@ -1587,5 +1596,6 @@ function sendRewardToReferrals(address investor,uint _investedAmount)  internal 
     {
         payable(owner()).transfer((address(this).balance));
     }
+
 
 }

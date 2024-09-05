@@ -142,7 +142,7 @@ const Routing = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/staking" element={<Staking tokenPrice={tokenPrice} stakelimit={stakelimit} totalStaked={totalStaked} totalusers={totalusers} totalwithdraw={totalwithdraw} totalEarning={totalEarning} allInvestments_reward = {allInvestments_reward} totalInvestment={totalInvestment} regai_balance={regai_balance}  min_stake={min_stake}  allInvestments={allInvestments}  test={test}/>} />
-        <Route path="/staking-pass" element={<StakingPass  owner={owner} user={user} nft_priceInBNB={nft_priceInBNB} nft_price={nft_price} balance={balance} supply={supply}/>} />
+        <Route path="/staking-pass" element={<StakingPass  owner={owner} user={user} nft_priceInBNB={nft_priceInBNB} nft_price={nft_price} balance={balance} supply={supply} test={test} />} />
         <Route path="/admin-form" element={<AdminForm />} />
         <Route path="/learn-more" element={<LearnMore />} />
 
