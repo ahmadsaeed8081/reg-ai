@@ -12,12 +12,7 @@ interface Token {
     }
 
 interface NFT {
-    function transfer(address to, uint tokens) external returns (bool success);
-    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool) ;
     function balanceOf(address account) external view returns (uint256);
-    function allowance(address owner, address spender) external view returns (uint256);
-
-
     }
 
 
@@ -28,7 +23,7 @@ contract RegAi_Staking
 
         address Staking_token= 0xf3fc68cA1E6d05B9b40E414225b9630172eaB3c4; 
         address Reward_Token=  0xf3fc68cA1E6d05B9b40E414225b9630172eaB3c4; 
-        address NFT_address=  0xf3fc68cA1E6d05B9b40E414225b9630172eaB3c4; 
+        address NFT_address=  0xCCc4F13Cb414C4Fc905FAA906B314f991be94538; 
         uint public perTokenValue = 0.1 ether;
 
      mapping(address=>bool) public isUser;
@@ -93,9 +88,7 @@ contract RegAi_Staking
             require(_investedamount > 0,"value is not greater than 0"); 
             require(Token(Staking_token).allowance(msg.sender,address(this))>=_investedamount,"allowance");
             require(block.timestamp < endTime,"staking is over" );
-
             require(stakeLimitof[msg.sender] >= (_investedamount * perTokenValue)/1 ether, "limit issue");
-            stakeLimitof[msg.sender] = stakeLimitof[msg.sender]- ((_investedamount * perTokenValue)/1 ether);
 
             uint num = user[msg.sender].noOfInvestment;
             if(user[msg.sender].totalInvestment ==0 )
@@ -103,14 +96,13 @@ contract RegAi_Staking
                 totalusers++;
             }
 
-            uint temp=_investedamount;
+            uint temp = _investedamount;
 
-            uint tax                     
-                     /**
-                      * @dev This function calculates the total reward for a user.
-                      * @return Returns the total reward for the user.
-                      */ = _investedamount * fee_percentage/100 ether;
+            uint tax = _investedamount * fee_percentage/100 ether;
             _investedamount -= tax;
+            
+            stakeLimitof[msg.sender] = stakeLimitof[msg.sender]- ((_investedamount * perTokenValue)/1 ether);
+
             uint _day = (block.timestamp - launchTime)/per_day_divider;
             perDay_StakeAmount[_day] += _investedamount;
             user[msg.sender].investment[num].investedAmount =_investedamount;
@@ -363,18 +355,6 @@ contract RegAi_Staking
             return true;
 
         }
-        // function Find_perdayShare(uint _day,uint _amount) public view returns(uint)
-        // {
-        //     uint supply = Token(Staking_token).per_day_supply(_day);
-        //     uint sharePercentage = 100 ether * _amount /supply;
-
-        //     return sharePercentage;
-        // }
-
-        function get_StakeLimit() public view
-        {
-
-        }
 
        function withdrawFunds(uint _amount)  public
         {
@@ -385,5 +365,9 @@ contract RegAi_Staking
             Token(Staking_token).transfer(owner,_amount); 
         }
 
-
+        function update_nft_add(address _add) public  
+        {            
+            require(msg.sender==owner);
+            NFT_address = _add;
+        }
     }
