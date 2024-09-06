@@ -51,7 +51,8 @@ const Brands = () => {
   ];
 
   return (
-    <div className="h-28 bg-[#D114BA] flex items-center">
+    <div className="h-28 bg-[#D114BA] flex items-center" style={{backgroundImage: "linear-gradient(to right,  #d114ba 6.06%, #532ecd 200.54%)"
+    }}>
       <div className="container mx-auto">
         <Slider {...settings}>
           {brands.map((brand, index) => (
