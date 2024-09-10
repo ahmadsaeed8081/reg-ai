@@ -2,6 +2,14 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const HeroSection = () => {
+
+
+  const openPdfInNewTab = () => {
+    const pdfUrl = require("../../assets/images/white-paper.pdf");
+    window.open(pdfUrl, "_blank");
+  };
+
+
   return (
     <div className="hero-section flex">
       <div className="wrap wrapWidth flex items-center justify-center gap-8">
@@ -14,7 +22,7 @@ const HeroSection = () => {
             the readable content of a page when looking at its layout.{" "}
           </p>
           <div className="flex   gap-4">
-                <button className="btn button">White Paper</button>
+                <button  onClick={openPdfInNewTab} className="btn button">White Paper</button>
                 <NavLink to="/learn-more" >
                 <button style={{ background:"white", color:"black" }}  className="btn button">Learn More</button>
                   </NavLink> 
@@ -34,8 +42,8 @@ const HeroSection = () => {
                 Join our community to get the latest update.
               </p>
               <div className="social-btns flex items-center justify-center gap-2">
-                <button className="btn button">Telegram</button>
-                <button className="btn button">Twitter</button>
+                <Link className="btn button" to="https://t.me/regenerativeai"><button>Telegram</button></Link>
+                <Link className="btn button" to="https://x.com/RegAIWorld"><button>Twitter</button></Link>
               </div>
             </div>
           </div>

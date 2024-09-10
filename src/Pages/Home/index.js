@@ -24,7 +24,7 @@ const Main = () => {
         <About />
         <RoadMap />
         <GenerativeAi />
-        <OurTeam />
+        {/* <OurTeam /> */}
         <Faqs />
         {/* <Modal open={open} onClose={() => setOpen(false)}>
           <TableRowModel setOpen={setOpen} item={modelData} />

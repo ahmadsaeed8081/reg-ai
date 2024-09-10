@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { TelegramIcon, TwitterIcon } from "../../assets/Icons";
-
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className="footer-comp flex flex-col bottom-0 left-0 right-0 w-full min-h-[60px]">
       <div className="top-sec flex py-8 border-t border-gray-600">
         <div className="wrap wrapWidth flex flex-col gap-2">
-          <h1 className="text-white text-3xl font-medium text-center">
+          <h1 className="text-white text-1xl font-medium text-center">
             Token Address
           </h1>
           <p className="text-white font-light text-sm text-center">
@@ -14,10 +14,10 @@ const Footer = () => {
           </p>
           <div className="social flex items-center justify-center gap-3">
             <div className="icon flex items-center justify-center cursor-pointer">
-              <TwitterIcon />
+                <Link  to="https://x.com/RegAIWorld"><TwitterIcon /></Link>
             </div>
             <div className="icon flex items-center justify-center cursor-pointer">
-              <TelegramIcon />
+            <Link to="https://t.me/regenerativeai"><TelegramIcon /></Link>
             </div>
           </div>
         </div>
