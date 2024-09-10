@@ -13,16 +13,12 @@ const About = () => {
             <div className="title">ABOUT</div>
             <div className="flex w-ful line"></div>
             <p className="desc">
-              You will need tokens in your wallet to stake. Once you purchase
-              CIP tokens, make sure that you add the CIP token to your
-              MetaMask/TrustWallet Wallet so you can view your CIP balance.
+            The core purpose of Regenerative AI is to streamline the process of token discovery byanalyzing and identifying emerging trends in the volatile and rapidly evolvingcryptocurrency market.
               <br />
               <br />
-              Click the "Connect Wallet" button at the upper right corner of the
-              site and make sure you have the Arbitrum network selected in your
-              MetaMask wallet.
+              Our protocol utilizes a robust AI framework to continuously scan DEX platforms, evaluating various metrics to pinpoint promising tokens. This proactive approach ensures that traders and investors have early access to tokens with significant growth potential, optimizing their investment strategies and opportunities.
             </p>
-            <button className="btn-dtail btn button">More Details</button>
+            {/* <button className="btn-dtail btn button">More Details</button> */}
           </div>
         </div>
         <div className="token-box flex">

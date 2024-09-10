@@ -32,7 +32,7 @@ const DropDown = ({ dropDownList, selectedValue, setSelectedValue }) => {
                 className="unit-eng flex items-center font s14 b4"
                 placeholder="Plano"
               >
-                {selectedValue ? Number(selectedValue[0])/10**18 : ""}
+                {selectedValue ? Number(selectedValue[0])/10**18 : "Select"}
               </span>
             </div>
           </div>

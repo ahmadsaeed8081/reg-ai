@@ -174,10 +174,10 @@ useEffect(()=>{
             <img src={sp_image} />
           </div>
           <div className="right flex flex-col flex-1">
-            <h1 className="title mb-4">Regenerative A.I Token</h1>
+            <h1 className="title mb-4">Regenerative AI Staking Pass</h1>
             <p className="price-lbl text-white font-light">Price per mint</p>
             <h2 className="title2 text-white font-medium text-xl mb-4">
-             ${props.nft_price?Number(props.nft_price)/10**18:0} worth BNB
+             ${props.nft_price?Number(props.nft_price)/10**18:0} worth of BNB
             </h2>
             <div className="flex flex-col gap-2">
               <div className="border border-[#D114BA] py-2 px-3 rounded-lg flex justify-between gap-2">
@@ -190,7 +190,7 @@ useEffect(()=>{
               </div>
               <div className="border border-[#D114BA] py-2 px-3 rounded-lg flex justify-between gap-2">
                 <label className="inter text-white font-normal text-sm">
-                  Mint Amount
+                  Mint Quantity
                 </label>
                 <div className="flex items-center gap-2">
                   <div className="flex items-center justify-center gap-2">
@@ -223,7 +223,7 @@ useEffect(()=>{
                   {(Number(numb)* Convert_To_eth(Number(props.nft_priceInBNB)))} BNB
                 </label>
               </div>
-              <button onClick={Mint} className="btn button text-white">{isConfirming ? "confirming" : "Mint Now"}</button>
+              <button onClick={Mint} className="btn button text-white">{isConfirming ? "confirming" : "BUY NOW"}</button>
             </div>
           </div>
         </div>
@@ -245,13 +245,13 @@ useEffect(()=>{
                 </h3>
               </div>
               <h2 className="zen-dots font-medium text-2xl inter text-white sm:text-center text-left">
-              Total Earning : {props.user? ((Number(props.user[4])+ Number(props.user[7]))/10**18).toFixed(4) :0} <span className=" text-[#FF5EEB]">BNB</span>
+              Total Earnings : {props.user? ((Number(props.user[4])+ Number(props.user[7]))/10**18).toFixed(4) :0} <span className=" text-[#FF5EEB]">BNB</span>
               </h2>
 
               <div className="sm:flex block items-center justify-between inter">
                 <div className="flex flex-col">
                   <h1 className="text-white  text-xl sm:text-center  text-left">
-                    Direct sale
+                    Direct Sale
                   </h1>
                   <div className=" flex items-center  pt-3.5 justify-between  gap-20 ">
                     <div className=" sm:text-center  text-left">
@@ -274,7 +274,7 @@ useEffect(()=>{
                 <div className=" border  sm:block  hidden  border-[#D114BA] h-[100px]"></div>
                 <div className="flex flex-col">
                   <h1 className="text-white  text-xl sm:text-center  text-left">
-                    Indirect sale
+                    Indirect Sale
                   </h1>
                   <div className=" flex items-center  pt-3.5 justify-between  gap-20 ">
                     <div className=" sm:text-center  text-left">

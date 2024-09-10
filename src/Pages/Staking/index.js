@@ -344,7 +344,7 @@ useEffect(()=>{
                     <div className="flex items-center justify-center">
                       <img src="./images/favicon.png" className="h-10 w-10" />
                     </div>
-                    <h3 className="text-white font-normal text-lg">A.I</h3>
+                    <h3 className="text-white font-normal text-xl">$REG AI</h3>
                   </div>
                   <div className="flex flex-col p-6">
                     <div className="flex flex-col gap-3 border-b border-[#D114BA] pb-6">
@@ -353,7 +353,7 @@ useEffect(()=>{
                           Total Staked:
                         </label>
                         <label className="text-white font-normal text-sm">
-                          {props.totalStaked?Number(props.totalStaked)/10**18:0} Reg AI
+                          {props.totalStaked?Number(props.totalStaked)/10**18:0} REG AI
                         </label>
                       </div>
                       <div className="flex items-center justify-between">
@@ -371,7 +371,7 @@ useEffect(()=>{
                           Your Stake Limit Left:
                         </label>
                         <label className="text-white font-normal text-sm">
-                        {props.stakelimit?(Number(props.stakelimit)/10**18) / (Number(props.tokenPrice)/10**18):0} Reg AI
+                        {props.stakelimit?(Number(props.stakelimit)/10**18) / (Number(props.tokenPrice)/10**18):0} REG AI
 
                         </label>
                       </div>
@@ -379,10 +379,10 @@ useEffect(()=>{
                     <div className="flex flex-col my-10">
                       <div className="flex items-center justify-between">
                         <h1 className="text-whitess text-white font-light text-sm">
-                          Write Amount
+                          Stake Amount
                         </h1>
                         <h1 className="text-white font-light text-sm">
-                          Balance: {props.regai_balance?(Number(props.regai_balance)/10**18):0} Reg Ai
+                          Balance: {props.regai_balance?(Number(props.regai_balance)/10**18):0} REG AI
                         </h1>
                       </div>
                       <div className="flex items-center p-2 rounded-lg border border-[#D114BA]">
@@ -416,23 +416,23 @@ useEffect(()=>{
                     <div className="flex items-center justify-center">
                       <img src="./images/favicon.png" className="h-10 w-10" />
                     </div>
-                    <h3 className="text-white font-normal text-lg">A.I</h3>
+                    <h3 className="text-white font-normal text-xl">$REG AI</h3>
                   </div>
                   <div className="flex flex-col p-6">
                     <div className="flex flex-col gap-3 border-b border-[#D114BA] pb-6">
                       <div className="flex items-center justify-between">
                         <label className="text-white font-normal text-sm">
-                          Your Staked Amoount
+                          Your Staked Amount
                         </label>
                         <label className="text-white font-normal text-sm">
-                          {props.totalInvestment?Number(props.totalInvestment)/10**18:0} Reg AI
+                          {props.totalInvestment?Number(props.totalInvestment)/10**18:0} REG AI
                         </label>
                       </div>
                     </div>
                     <div className="flex flex-col my-10 gap-2">
                       <div className="flex items-center justify-between">
                         <h1 className="text-white font-light text-sm inter">
-                          Current Investment
+                          Active Stakings
                         </h1>
                       </div>
                       <DropDown
@@ -451,16 +451,16 @@ useEffect(()=>{
                     <div className="flex items-center justify-center">
                       <img src="./images/favicon.png" className="h-10 w-10" />
                     </div>
-                    <h3 className="text-white font-normal text-lg">A.I</h3>
+                    <h3 className="text-white font-normal text-xl">$REG AI</h3>
                   </div>
                   <div className="flex flex-col p-6">
                     <div className="flex flex-col gap-3 border-b border-[#D114BA] pb-6">
                       <div className="flex items-center justify-between">
                         <label className="text-white font-normal text-sm inter">
-                          Total Earnings
+                          Total Staking Rewards
                         </label>
                         <label className="text-white font-normal text-sm inter">
-                          {props.totalEarning ? Number(props.totalEarning)/10**18:0} Reg AI
+                          {props.totalEarning ? Number(props.totalEarning)/10**18:0} REG AI
                         </label>
                       </div>
                       <div className="flex items-center justify-between">
@@ -468,14 +468,14 @@ useEffect(()=>{
                           Available to Claim
                         </label>
                         <label className="text-white font-normal text-sm inter">
-                        {props.totalEarning?( Number(props.totalEarning) - Number(props.totalwithdraw))/10**18 :0} Reg AI
+                        {props.totalEarning?( Number(props.totalEarning) - Number(props.totalwithdraw))/10**18 :0} REG AI
                         </label>
                       </div>
                     </div>
                     <div className="flex flex-col my-10 gap-2">
                       <div className="flex items-center justify-between">
                         <h1 className="text-white font-light text-sm inter">
-                          Investment History
+                        Staking History
                         </h1>
                       </div>
                       <DropDown
@@ -601,6 +601,8 @@ useEffect(()=>{
           </div> */}
         </div>
       </div>
+      <ToastContainer />
+
     </Wrapper>
   );
 };

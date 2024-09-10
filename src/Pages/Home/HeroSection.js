@@ -18,8 +18,7 @@ const HeroSection = () => {
             Welcome To The <span>Regenerative A.I</span> World
           </h1>
           <p className="home-desc">
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout.{" "}
+          Optimum utilization of AI technology to discover potential DEX tokens.{" "}
           </p>
           <div className="flex   gap-4">
                 <button  onClick={openPdfInNewTab} className="btn button">White Paper</button>
@@ -32,12 +31,12 @@ const HeroSection = () => {
         </div>
         <div className="right-side flex flex-1 justify-end">
           <div className="box-presale flex flex-col">
-            <h1 className="title">Presale Has Ended</h1>
-            <h3 className="sub-title">Regenerative A.I Token Is Sold!</h3>
+            <h1 className="title">$Reg AI Presale Has Ended</h1>
+            <h3 className="sub-title">10% Regenerative A.I Tokens are Sold!</h3>
             <div className="box-body flex flex-col gap-4">
-              <h1 className="numb">$9,769,923,4</h1>
-              <p className="desc">you can still buy from</p>
-              <h2 className="title2 text-center">Pancakeswap</h2>
+              <h1 className="numb">$50,000.00</h1>
+              <p className="desc">Worth of BNB to be Added to liquidity</p>
+              <h2 className="title2 text-center">TRADING BEGINS SOON</h2>
               <p className="desc2">
                 Join our community to get the latest update.
               </p>
