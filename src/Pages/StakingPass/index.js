@@ -72,7 +72,7 @@ const StakingPass = (props) => {
       address: mint_address,
       functionName: "mint", 
       args: [numb,ref_add,"78967887"],
-      value: props.owner!=address? (Number(numb) * (Number(props.nft_priceInBNB))).toString():"0"
+      value: props.owner!=address ? (Number(numb) * (Number(props.nft_priceInBNB))).toString():"0"
 
     });
 
