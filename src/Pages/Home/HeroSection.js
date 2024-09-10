@@ -29,6 +29,8 @@ const HeroSection = () => {
          
 
         </div>
+
+
         <div className="right-side flex flex-1 justify-end">
           <div className="box-presale flex flex-col">
             <h1 className="title">$Reg AI Presale Has Ended</h1>
@@ -39,6 +41,9 @@ const HeroSection = () => {
               <h2 className="title2 text-center">TRADING BEGINS SOON</h2>
               <p className="desc2">
                 Join our community to get the latest update.
+
+
+                
               </p>
               <div className="social-btns flex items-center justify-center gap-2">
                 <Link className="btn button" to="https://t.me/regenerativeai"><button>Telegram</button></Link>
