@@ -215,7 +215,7 @@ useEffect(()=>{
     
     if(Number(props.stakelimit)==0 )
     {
-      alert("kindly Purchase staking pass to do staking");
+      alert("Kindly purchase Regenerative AI Staking Pass to participate.");
       return;
     }
 
