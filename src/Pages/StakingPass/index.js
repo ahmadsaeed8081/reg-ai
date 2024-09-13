@@ -238,7 +238,7 @@ useEffect(()=>{
             Your Referral Reward
           </h1>
           <div className="flex items-center  flex-wrap justify-center cursor-pointer">
-            <div className="flex flex-col gap-6 rounded-lg p-5 border border-[#D114BA] sm:w-[800px]  min-h-[200px]">
+            <div className="flex flex-col gap-6 rounded-lg p-5 border border-[#D114BA] w-full  min-h-[200px]">
               <div className="flex items-center justify-end w-full">
                 <h3 className="bg-[#D114BA] text-white inter font-normal text-xs p-1 rounded-lg" >
                   {/* 85% */}
@@ -250,47 +250,47 @@ useEffect(()=>{
 
               <div className="sm:flex block items-center justify-between inter">
                 <div className="flex flex-col">
-                  <h1 className="text-white  text-xl sm:text-center  text-left">
+                  <h1 className="text-white  sm:text-xl text-sm sm:text-center  text-left">
                     Direct Sale
                   </h1>
                   <div className=" flex items-center  pt-3.5 justify-between  gap-20 ">
                     <div className=" sm:text-center  text-left">
-                      <p className=" text-white text-[16px]">Quantity</p>
-                      <p className=" text-white text-[16px] pt-2">{props.user? Number(props.user[2]):0}</p>
-                      <p className=" text-white text-[16px]">SP</p>
+                      <p className=" text-white sm:text-[16px] text-[12px]">Quantity</p>
+                      <p className=" text-white sm:text-[16px] text-[12px] pt-2">{props.user? Number(props.user[2]):0}</p>
+                      <p className=" text-white sm:text-[16px] text-[12px]">SP</p>
                     </div>
                     <div className=" sm:text-center  text-left">
-                      <p className=" text-white text-[16px]">Amount</p>
-                      <p className=" text-white text-[16px] pt-2">{props.user? (Number(props.user[3])/10**18).toFixed(4):0}</p>
-                      <p className=" text-white text-[16px]">BNB</p>
+                      <p className=" text-white sm:text-[16px] text-[12px]">Amount</p>
+                      <p className=" text-white sm:text-[16px] text-[12px] pt-2">{props.user? (Number(props.user[3])/10**18).toFixed(4):0}</p>
+                      <p className=" text-white sm:text-[16px] text-[12px]">BNB</p>
                     </div>
-                    <div className="sm:text-center  text-left">
-                      <p className=" text-[#D114BA]  text-[16px]">Reward</p>
-                      <p className=" text-[#D114BA] text-[16px] pt-2">{props.user? (Number(props.user[4])/10**18).toFixed(4):0}</p>
-                      <p className=" text-white text-[16px]">BNB</p>
+                    <div className="sm:text-center  sm:text-[16px] text-[12px]">
+                      <p className=" text-[#D114BA]  sm:text-[16px] text-[12px]">Reward</p>
+                      <p className=" text-[#D114BA] sm:text-[16px] text-[12px] pt-2">{props.user? (Number(props.user[4])/10**18).toFixed(4):0}</p>
+                      <p className=" text-white sm:text-[16px] text-[12px]">BNB</p>
                     </div>
                   </div>
                 </div>
                 <div className=" border  sm:block  hidden  border-[#D114BA] h-[100px]"></div>
                 <div className="flex flex-col">
-                  <h1 className="text-white  text-xl sm:text-center  text-left">
+                  <h1 className="text-white  sm:text-xl text-sm sm:text-center  text-left">
                     Indirect Sale
                   </h1>
                   <div className=" flex items-center  pt-3.5 justify-between  gap-20 ">
                     <div className=" sm:text-center  text-left">
-                      <p className=" text-white text-[16px]">Quantity</p>
-                      <p className=" text-white text-[16px] pt-2">{props.user? Number(props.user[5]):0}</p>
-                      <p className=" text-white text-[16px]">SP</p>
+                      <p className=" text-white  sm:text-[16px] text-[12px]">Quantity</p>
+                      <p className=" text-white sm:text-[16px] text-[12px] pt-2">{props.user? Number(props.user[5]):0}</p>
+                      <p className=" text-white sm:text-[16px] text-[12px]">SP</p>
                     </div>
                     <div className=" sm:text-center  text-left">
-                      <p className=" text-white text-[16px]">Amount</p>
-                      <p className=" text-white text-[16px] pt-2">{props.user? (Number(props.user[6])/10**18).toFixed(4):0}</p>
-                      <p className=" text-white text-[16px]">BNB</p>
+                      <p className=" text-white sm:text-[16px] text-[12px]">Amount</p>
+                      <p className=" text-white sm:text-[16px] text-[12px] pt-2">{props.user? (Number(props.user[6])/10**18).toFixed(4):0}</p>
+                      <p className=" text-white sm:text-[16px] text-[12px]">BNB</p>
                     </div>
                     <div className="sm:text-center  text-left">
-                      <p className=" text-[#D114BA]  text-[16px]">Reward</p>
-                      <p className=" text-[#D114BA] text-[16px] pt-2">{props.user? (Number(props.user[7])/10**18).toFixed(4):0}</p>
-                      <p className=" text-white text-[16px]">BNB</p>
+                      <p className=" text-[#D114BA]  sm:text-[16px] text-[12px]">Reward</p>
+                      <p className=" text-[#D114BA] sm:text-[16px] text-[12px] pt-2">{props.user? (Number(props.user[7])/10**18).toFixed(4):0}</p>
+                      <p className=" text-white sm:text-[16px] text-[12px]">BNB</p>
                     </div>
                   </div>
                 </div>
@@ -432,7 +432,7 @@ useEffect(()=>{
             </div> */}
           </div>
 
-          <div className="flex   flex-col p-5 border border-[#D114BA] rounded-xl mt-10  sm:w-[800px] mx-auto">
+          <div className="flex   flex-col p-5 border border-[#D114BA] rounded-xl mt-10  w-full mx-auto">
             <div className="flex items-center gap-2">
               <h1 className="text-white" >My Link</h1>
               <div className="flex items-center justify-center cursor-pointer h-4 w-4">

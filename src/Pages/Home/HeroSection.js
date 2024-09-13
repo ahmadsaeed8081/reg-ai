@@ -45,9 +45,23 @@ const HeroSection = () => {
 
                 
               </p>
-              <div className="social-btns flex items-center justify-center gap-2">
+              {/* <div className="social-btns flex items-center justify-center gap-2">
                 <Link className="btn button" to="https://t.me/regenerativeai"><button>Telegram</button></Link>
                 <Link className="btn button" to="https://x.com/RegAIWorld"><button>Twitter</button></Link>
+              </div> */}
+              <div className="social-btns flex items-center justify-center gap-3">
+              <Link to="https://www.youtube.com/@Regaiworld">
+                  <img src={require('../../assets/images/youtube.png')} />
+                </Link>
+                <Link to="https://www.tiktok.com/@regenerativeai">
+                  <img src={require('../../assets/images/tiktok.png')} />
+                </Link>
+                <Link to="https://t.me/regenerativeai">
+                  <img src={require('../../assets/images/messages.png')} />
+                </Link>
+                <Link to="https://x.com/RegAIWorld">
+                  <img src={require('../../assets/images/twitter.png')} />
+                </Link>
               </div>
             </div>
           </div>

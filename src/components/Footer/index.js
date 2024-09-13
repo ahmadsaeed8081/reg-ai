@@ -12,14 +12,20 @@ const Footer = () => {
           <p className="text-white font-light text-sm text-center">
             Reg Ai: 0xa3A2d98c55DA6ef9C732b44d2E9BB8D9Ea719362
           </p>
-          <div className="social flex items-center justify-center gap-3">
-            <div className="icon flex items-center justify-center cursor-pointer">
-                <Link  to="https://x.com/RegAIWorld"><TwitterIcon /></Link>
-            </div>
-            <div className="icon flex items-center justify-center cursor-pointer">
-            <Link to="https://t.me/regenerativeai"><TelegramIcon /></Link>
-            </div>
-          </div>
+          <div className="social-btns mt-3 flex items-center justify-center gap-3">
+                <Link to="https://www.youtube.com/@Regaiworld">
+                  <img src={require('../../assets/images/youtube.png')} />
+                </Link>
+                <Link to="https://www.tiktok.com/@regenerativeai">
+                  <img src={require('../../assets/images/tiktok.png')} />
+                </Link>
+                <Link to="https://t.me/regenerativeai">
+                  <img src={require('../../assets/images/messages.png')} />
+                </Link>
+                <Link to="https://x.com/RegAIWorld">
+                  <img src={require('../../assets/images/twitter.png')} />
+                </Link>
+              </div>
         </div>
       </div>
       <div className="copy-right">
