@@ -1337,7 +1337,6 @@ contract RegAI_StakingPass is ERC721Enumerable, Ownable {
             address upliner;
             address[] team;
             bool investBefore;
-            // uint totalsales;
             
             uint direct_quantity;
             uint direct_amount;
@@ -1399,14 +1398,14 @@ contract RegAI_StakingPass is ERC721Enumerable, Ownable {
 
             while(temp!=address(0) && i < 3)
             {
-                if(user[temp].direct_quantity >= level_sale[i])
+                if((user[temp].direct_quantity + user[temp].indirect_quantity) >= level_sale[i])
                 {
                     uint reward1 = (percentage[i]  * _investedAmount)/100 ether;
 
                     if(i==0)
                     {
                         user[temp].direct_quantity++ ; 
-                        user[temp].direct_amount += get_BNBPrice() ; 
+                        user[temp].direct_amount += get_BNBPrice(); 
                         user[temp].direct_reward += reward1;
                     }
                     else 
@@ -1440,6 +1439,7 @@ contract RegAI_StakingPass is ERC721Enumerable, Ownable {
                 }
                 else{
 
+                    user[temp].indirect_quantity++;
                     temp = user[temp].upliner;
                     pre_person=false;
                 }
