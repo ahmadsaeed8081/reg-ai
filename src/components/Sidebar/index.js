@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { CloseIcon } from "../../assets/Icons";
 
+
+import { useWeb3Modal,useWeb3ModalTheme,use } from '@web3modal/wagmi/react'
+import { useAccount, useReadContract, useWriteContract } from "wagmi";
+
+
 const Sidebar = ({ openSidebar, setOpenSidebar }) => {
   console.log("openSidebar....", openSidebar);
   const navBarItems = [
@@ -14,6 +19,12 @@ const Sidebar = ({ openSidebar, setOpenSidebar }) => {
     { lbl: "Road Map", slug: "#roadmap" },
     { lbl: "Tokenomics", slug: "/" },
   ];
+
+
+  const { open, close } = useWeb3Modal()
+  const { isConnected,isDisconnected,chain } = useAccount()
+  const { address } = useAccount();
+
 
   useEffect(() => {
     document.body.addEventListener("click", () => {
@@ -63,12 +74,10 @@ const Sidebar = ({ openSidebar, setOpenSidebar }) => {
                 </Link>
               ))}
             </>
-            <Link
-              to="/staking-pass"
-              className="btn-stack button w-full rounded-md inter"
-            >
-              Staking Pass
-            </Link>
+            <button onClick={() => open()}  className="btn-stack button">
+            {!isConnected?("Connect Wallet"):(address.slice(0,4)+"...."+address.slice(39,42))}
+
+          </button>
           </div>
         </div>
       </div>
