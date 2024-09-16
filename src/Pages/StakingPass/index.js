@@ -28,6 +28,10 @@ import {
   useWriteContract,
   useWaitForTransactionReceipt,
 } from "wagmi";
+
+
+
+
 import { bsc, bscTestnet } from "wagmi/chains";
 
 const StakingPass = (props) => {
@@ -69,7 +73,7 @@ const StakingPass = (props) => {
         abi: minting_abi,
         address: mint_address,
         functionName: "mint",
-        args: [numb, ref_add, "78967887"],
+        args: [numb, ref_add, "789868687687678687876876"],
         value:
           props.owner != address
             ? (Number(numb) * Number(props.nft_priceInBNB)).toString()
@@ -110,11 +114,40 @@ const StakingPass = (props) => {
     return val;
   }
 
-  async function Mint() {
+  async function Mint() 
+  {
     if (isDisconnected) {
       alert("kindly connect your wallet ");
       return;
     }
+
+
+    const web3= new Web3(new Web3.providers.HttpProvider("https://bsc-testnet-rpc.publicnode.com	"));
+    const staking_contract=new web3.eth.Contract(minting_abi,mint_address);
+
+    
+    if(Number(props.nft_priceInBNB) == 0 )
+    {
+      alert("Kindly wait data is fetching, try again in few seconds");
+      return;
+    }
+    if(!Number(props.user[1]))
+    {
+      if(ref_add == "0x0000000000000000000000000000000000000000" )
+      {
+        alert("Its a community based project, You cannot join without a Referral Link");
+        return;
+      }
+      let ref_reg = await staking_contract.methods.user(ref_add).call();    
+  
+      if(ref_reg[1] == false )
+      {
+        alert("Your given Referral link is not Registered");
+        return;
+      }
+    }
+
+
     if (numb == 0) {
       alert("kindly write amount to stake ");
       return;

@@ -60,7 +60,7 @@ const Routing = () => {
   async function test() 
     {
   
-      const web3= new Web3(new Web3.providers.HttpProvider("https://bsc-testnet-rpc.publicnode.com	"));
+      const web3= new Web3(new Web3.providers.HttpProvider("https://bsc-testnet-rpc.publicnode.com"));
       const regai_contract=new web3.eth.Contract(token_abi,regai_address);
       const staking_contract=new web3.eth.Contract(staking_abi,staking_address);
       const contract = new web3.eth.Contract(minting_abi, mint_address);
@@ -126,7 +126,6 @@ const Routing = () => {
     set_investmentList(allInvestments);
     set_allInvestments_reward(allInvestments_reward)
 
-
     }
 
 
@@ -142,7 +141,7 @@ const Routing = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/staking" element={<Staking tokenPrice={tokenPrice} stakelimit={stakelimit} totalStaked={totalStaked} totalusers={totalusers} totalwithdraw={totalwithdraw} totalEarning={totalEarning} allInvestments_reward = {allInvestments_reward} totalInvestment={totalInvestment} regai_balance={regai_balance}  min_stake={min_stake}  allInvestments={allInvestments}  test={test}/>} />
-        <Route path="/staking-pass" element={<StakingPass  owner={owner} user={user} nft_priceInBNB={nft_priceInBNB} nft_price={nft_price} balance={balance} supply={supply} test={test} />} />
+        <Route path="/staking-pass" element={<StakingPass regai_balance={regai_balance}   owner={owner} user={user} nft_priceInBNB={nft_priceInBNB} nft_price={nft_price} balance={balance} supply={supply} test={test} />} />
         <Route path="/admin-form" element={<AdminForm />} />
         <Route path="/learn-more" element={<LearnMore />} />
 

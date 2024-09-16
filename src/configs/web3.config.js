@@ -8,7 +8,7 @@ import { createClient } from 'viem'
 const projectId = process.env.REACT_APP_WC_PROJECT_ID;
 const metadata = {  
 
-    name: "REGAI Staking Pass",
+    name: "Regenerative AI",
     description: "",
     url: "https://regenerativeai.com",
     icons: ["https://regenerativeai.com"]

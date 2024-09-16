@@ -35,10 +35,10 @@ const Sidebar = ({ openSidebar, setOpenSidebar }) => {
 
   return (
     <div
-      className={`sidebar-s fixed rel anim ${openSidebar ? "show" : "hide"}`}
+      className={`sidebar-s fixed rel anim ${openSidebar ? "show" : "hide"}`} 
     >
       <div
-        className={`side-block flex col anim ${openSidebar ? "show" : "hide"}`}
+        className={`side-block flex col anim ${openSidebar ? "show" : "hide"}`} 
         onClick={(e) => {
           e.stopPropagation();
         }}

@@ -26,9 +26,7 @@ const Main = () => {
         <GenerativeAi />
         {/* <OurTeam /> */}
         <Faqs />
-        {/* <Modal open={open} onClose={() => setOpen(false)}>
-          <TableRowModel setOpen={setOpen} item={modelData} />
-        </Modal> */}
+
       </div>
     </Wrapper>
   );
