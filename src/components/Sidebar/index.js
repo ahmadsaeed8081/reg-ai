@@ -16,6 +16,8 @@ const Sidebar = ({ openSidebar, setOpenSidebar }) => {
       slug: "#aboutus",
     },
     { lbl: "Staking", slug: "/staking" },
+    { lbl: "Staking Pass", slug: "/staking-pass" },
+
     { lbl: "Road Map", slug: "#roadmap" },
     { lbl: "Tokenomics", slug: "/" },
   ];
