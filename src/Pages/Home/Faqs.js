@@ -108,7 +108,7 @@ const Faqs = () => {
     );
   };
   return (
-    <div className="faqs-section flex">
+    <div id="faq" className="faqs-section flex">
       <div className="wrap wrapWidth flex gap-10">
         <div className="meta-side flex flex-col gap-6 flex-1">
           <div className="flex items-center gap-4">

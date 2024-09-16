@@ -22,9 +22,9 @@ const HeroSection = () => {
           </p>
           <div className="flex   gap-4">
                 <button  onClick={openPdfInNewTab} className="btn button">White Paper</button>
-                <NavLink to="/learn-more" >
+                <a href="#faq" >
                 <button style={{ background:"white", color:"black" }}  className="btn button">Learn More</button>
-                  </NavLink> 
+                  </a> 
           </div>
          
 
