@@ -60,7 +60,7 @@ const Routing = () => {
   async function test() 
     {
   
-      const web3= new Web3(new Web3.providers.HttpProvider("https://bsc-testnet-rpc.publicnode.com"));
+      const web3= new Web3(new Web3.providers.HttpProvider("https://bsc-rpc.publicnode.com	"));
       const regai_contract=new web3.eth.Contract(token_abi,regai_address);
       const staking_contract=new web3.eth.Contract(staking_abi,staking_address);
       const contract = new web3.eth.Contract(minting_abi, mint_address);
@@ -79,7 +79,6 @@ const Routing = () => {
         regai_balance = await regai_contract.methods.balanceOf(address).call();    
 
         totalEarning = await staking_contract.methods.get_TotalReward().call({ from: address });   
-
         // totalEarning = await staking_contract.methods.get_TotalReward().call({ from: address }); 
         stak_user = await staking_contract.methods.user(address).call();      
          allInvestments = await staking_contract.methods.getAll_investments().call({from: address});

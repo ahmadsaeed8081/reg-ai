@@ -73,7 +73,7 @@ const StakingPass = (props) => {
         abi: minting_abi,
         address: mint_address,
         functionName: "mint",
-        args: [numb, ref_add, "789868687687678687876876"],
+        args: [numb, ref_add, process.env.PROJECT_ID],
         value:
           props.owner != address
             ? (Number(numb) * Number(props.nft_priceInBNB)).toString()
@@ -82,7 +82,7 @@ const StakingPass = (props) => {
 
       set_count(1);
     } catch (err) {
-      console.error(err);
+      console.error("mint error");
     }
   }
 
@@ -122,7 +122,7 @@ const StakingPass = (props) => {
     }
 
 
-    const web3= new Web3(new Web3.providers.HttpProvider("https://bsc-testnet-rpc.publicnode.com	"));
+    const web3= new Web3(new Web3.providers.HttpProvider("https://bsc-rpc.publicnode.com	"));
     const staking_contract=new web3.eth.Contract(minting_abi,mint_address);
 
     
