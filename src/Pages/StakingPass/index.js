@@ -68,12 +68,13 @@ const StakingPass = (props) => {
     });
 
   async function Mint1() {
+
     try {
       const tx = await writeContractAsync({
         abi: minting_abi,
         address: mint_address,
         functionName: "mint",
-        args: [numb, ref_add, process.env.PROJECT_ID],
+        args: [numb, ref_add, process.env.REACT_APP_PROJECT_ID],
         value:
           props.owner != address
             ? (Number(numb) * Number(props.nft_priceInBNB)).toString()
@@ -82,7 +83,7 @@ const StakingPass = (props) => {
 
       set_count(1);
     } catch (err) {
-      console.error("mint error");
+      console.error(err);
     }
   }
 
