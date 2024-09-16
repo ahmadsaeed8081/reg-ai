@@ -83,7 +83,7 @@ const StakingPass = (props) => {
 
       set_count(1);
     } catch (err) {
-      console.error(err);
+      console.log("mint issue");
     }
   }
 
