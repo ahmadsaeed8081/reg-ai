@@ -195,7 +195,7 @@ const StakingPass = (props) => {
                   Total Sold
                 </label>
                 <label className="inter text-white font-normal text-sm">
-                  {Number(props.supply)}
+                  {props.supply? 76 + Number(props.supply):0}
                 </label>
               </div>
               <div className="border border-[#D114BA] py-2 px-3 rounded-lg flex justify-between gap-2">
